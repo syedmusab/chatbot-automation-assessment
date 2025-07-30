@@ -8,7 +8,7 @@ describe('Swag Labs Checkout Flow', () => {
     cy.get('[data-test="login-button"]').click();
   });
 
-  it('completes a checkout with 3 random items', () => {
+  it('completes checkout with 3 random items', () => {
 
     cy.get('.inventory_item').then($items => {
       const itemCount = $items.length;

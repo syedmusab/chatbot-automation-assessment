@@ -1,4 +1,4 @@
-# Sauce Demo Cypress Automation
+# Saucelab Demo Automation with Cypress + Javascript
 
 ## ✅ Objective
 Automate a successful checkout process on [Sauce Labs Demo](https://www.saucedemo.com/) including:
@@ -10,7 +10,7 @@ Automate a successful checkout process on [Sauce Labs Demo](https://www.saucedem
 
 ## ✅ Setup Instructions
 ```bash
-git clone https://github.com/your-username/sauce-demo-cypress.git
+git clone https://github.com/syedmusab/saucelab-demo-cypress
 cd sauce-demo-cypress
 npm install
 npx cypress open   # for GUI
@@ -19,8 +19,12 @@ npx cypress run    # for headless + reporting
 
 ## ✅ Reporting
 Reports are saved in:  
-`cypress/reports/mochawesome-report/`
+`cypress/reports/`
 
 ## ✅ Credentials Used
-- **Username:** `standard_user`
-- **Password:** `secret_sauce`
+- **Username:** `same as shared`
+- **Password:** `same as shared`
+
+## ✅ Author
+`Syed Musab Ali`
+`engineermusab@gmail.com`
