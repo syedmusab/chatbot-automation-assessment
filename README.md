@@ -11,7 +11,7 @@ Automate a successful checkout process on [Sauce Labs Demo](https://www.saucedem
 ## ✅ Setup Instructions
 ```bash
 git clone https://github.com/syedmusab/saucelab-demo-cypress
-cd sauce-demo-cypress
+cd saucelab-demo-cypress
 npm install
 npx cypress open   # for GUI
 npx cypress run    # for headless + reporting
@@ -26,5 +26,6 @@ Reports are saved in:
 - **Password:** `same as shared`
 
 ## ✅ Author
-`Syed Musab Ali`
-`engineermusab@gmail.com`
+- `Syed Musab Ali`
+
+- `engineermusab@gmail.com`
