@@ -1,0 +1,13 @@
+{
+  "name": "sauce-demo-cypress",
+  "version": "1.0.0",
+  "description": "Automated test suite for Sauce Labs Demo Site",
+  "scripts": {
+    "test": "cypress run",
+    "open": "cypress open"
+  },
+  "devDependencies": {
+    "cypress": "^13.0.0",
+    "mochawesome": "^7.1.3"
+  }
+}
