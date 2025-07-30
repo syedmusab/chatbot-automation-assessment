@@ -12,9 +12,9 @@ Automate a successful checkout process on [Sauce Labs Demo](https://www.saucedem
 ```bash
 git clone https://github.com/syedmusab/saucelab-demo-cypress
 cd saucelab-demo-cypress
-npm install
-npx cypress open   # for GUI
-npx cypress run    # for headless + reporting
+npm install        # for installation of dependencies
+npx cypress open   # for GUI execution
+npx cypress run    # for headless execution and reporting
 ```
 
 ## ✅ Reporting
