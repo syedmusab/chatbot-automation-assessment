@@ -8,6 +8,10 @@ Automate a successful checkout process on [Sauce Labs Demo](https://www.saucedem
 - Checking out
 - Verifying total and confirmation message
 
+## ✅ Prerequisite
+- Visual Studio Code
+- node.js
+
 ## ✅ Setup Instructions
 ```bash
 git clone https://github.com/syedmusab/saucelab-demo-cypress
@@ -16,6 +20,10 @@ npm install        # for installation of dependencies
 npx cypress open   # for GUI execution
 npx cypress run    # for headless execution and reporting
 ```
+
+![Alt text](cypress/downloads/image.png)
+
+![Alt text](cypress/downloads/image-1.png)
 
 ## ✅ Reporting
 Reports are saved in:  
