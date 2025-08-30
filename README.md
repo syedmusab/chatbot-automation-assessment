@@ -40,11 +40,16 @@ This framework automates validation of a chatbot's behavior:
 
 ## Setup
 
+## Prerequisite
+- Visual Studio Code
+- node.js
+
 1. **Clone the repository**:  
 
 - https://github.com/syedmusab/chatbot-automation-assessment.git 
 
 2. **Command to install dependencies and run executions**
+
 - npm install    # for installation of dependencies
 
 ## Running Tests
