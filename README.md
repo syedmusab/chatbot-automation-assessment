@@ -19,7 +19,8 @@ This project is an **end-to-end automation framework** for testing chatbot funct
 This framework automates validation of a chatbot's behavior:
 
 - Verifies UI elements (chat widget, input box, scrolling).  
-- Ensures multilingual support (LTR for English, RTL for Arabic).  
+- Ensures multilingual support (LTR for English, RTL for Arabic).
+- Verifies the responses of Gen AI from different platforms and checks their accuracy.
 - Validates chatbot responses to **malicious prompts**:  
   - Sanitization (no `<script>` injection)  
   - Refusal responses  
