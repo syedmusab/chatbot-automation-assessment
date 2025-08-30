@@ -44,7 +44,7 @@ This framework automates validation of a chatbot's behavior:
 
 - https://github.com/syedmusab/chatbot-automation-assessment.git 
 
-2. ** Command to install dependencies and run executions**
+2. **Command to install dependencies and run executions**
 - npm install    # for installation of dependencies
 
 ## Running Tests
