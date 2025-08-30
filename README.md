@@ -1,39 +1,60 @@
-# Saucelab Demo Automation with Cypress + Javascript
+# Chatbot Automation Testing Framework - Gen AI
 
-## ✅ Objective
-Automate a successful checkout process on [Sauce Labs Demo](https://www.saucedemo.com/) including:
-- Logging in
-- Randomly selecting 3 items
-- Adding them to cart
-- Checking out
-- Verifying total and confirmation message
+This project is an **end-to-end automation framework** for testing chatbot functionality using **Cypress**. It covers UI validation, chatbot response validation, sanitization, refusal, and fallback responses for both malicious and normal prompts.
 
-## ✅ Prerequisite
-- Visual Studio Code
-- node.js
+---
 
-## ✅ Setup Instructions
-```bash
-git clone https://github.com/syedmusab/saucelab-demo-cypress
-cd saucelab-demo-cypress
+## Table of Contents
+
+- [Project Overview](#project-overview)  
+- [Tech Stack](#tech-stack)  
+- [Setup](#setup)   
+- [Running Tests](#running-tests)  
+- [Reports](#reports)  
+
+---
+
+## Project Overview
+
+This framework automates validation of a chatbot's behavior:
+
+- Verifies UI elements (chat widget, input box, scrolling).  
+- Ensures multilingual support (LTR for English, RTL for Arabic).  
+- Validates chatbot responses to **malicious prompts**:  
+  - Sanitization (no `<script>` injection)  
+  - Refusal responses  
+  - Fallback responses  
+- Supports reusable **Cypress custom commands** for cleaner test scripts.  
+
+---
+
+## Tech Stack
+
+- [Cypress](https://www.cypress.io/) – E2E testing  
+- JavaScript – Test scripting  
+- Mocha & Chai – Assertions  
+- Node.js – Runtime environment  
+
+---
+
+## Setup
+
+1. **Clone the repository**:  
+
+- https://github.com/syedmusab/chatbot-automation-assessment.git 
+
+-- Command to install dependencies and run executions
 npm install        # for installation of dependencies
+
+## Running Tests
 npx cypress open   # for GUI execution
 npx cypress run    # for headless execution and reporting
-```
 
-## ✅ Reporting
+## Reports
 Reports are saved in:  
 `cypress/reports/`
-![Alt text](cypress/downloads/image.png)<br/>
+![Alt text](cypress/screenshots/reports/image.png)<br/>
 
-![Alt text](cypress/downloads/image-1.png) <br/>
+![Alt text](cypress/screenshots/reports/image-1.png) <br/>
 
-
-## ✅ Credentials Used
-- **Username:** `same as shared`
-- **Password:** `same as shared`
-
-## ✅ Author
-- `Syed Musab Ali`
-
-- `engineermusab@gmail.com`
+![Alt text](cypress/screenshots/reports/image-2.png) <br/>
