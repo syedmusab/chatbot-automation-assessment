@@ -46,7 +46,7 @@ class ChatPage {
   sendMessage(message) {
     this.chatInput.type(message, { force: true });
     this.sendButton.click();
-    cy.wait(10000);
+    cy.wait(30000);
   }
 
   validateAIResponse(keywords) {

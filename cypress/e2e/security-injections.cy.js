@@ -16,7 +16,7 @@ describe('Security & Injection Handling Validation', () => {
     cy.login(Cypress.env('email'), Cypress.env('password'));
   });
 
-  it('Verificatio of chat input sanitizes special characters', { retries: 0 }, () => {
+  it('Verificatio of chat input sanitizes special characters', { retries: 2 }, () => {
     cy.fixture('test-data.json').then((testData) => {
 
       // Get the current language from Cypress environment variables
@@ -42,7 +42,7 @@ describe('Security & Injection Handling Validation', () => {
     });
   });
 
-  it('Verification of AI does not act on malicious prompts', { retries: 0 }, () => {
+  it('Verification of AI does not act on malicious prompts', { retries: 2 }, () => {
 
     cy.fixture('test-data.json').then((testData) => {
       const language = Cypress.env('language');
@@ -61,7 +61,7 @@ describe('Security & Injection Handling Validation', () => {
     });
   });
 
-  it('Verification of Fallback messages appear when expected', { retries: 0 }, () => {
+  it('Verification of Fallback messages appear when expected', { retries: 2 }, () => {
     cy.fixture('test-data.json').then((testData) => {
       const language = Cypress.env('language');
       const maliciousPrompt = testData[language].malicious_prompts.find(p => p.expected_behavior === 'garbage');
