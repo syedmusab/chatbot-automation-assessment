@@ -43,12 +43,12 @@ This framework automates validation of a chatbot's behavior:
 
 - https://github.com/syedmusab/chatbot-automation-assessment.git 
 
--- Command to install dependencies and run executions
-npm install        # for installation of dependencies
+2. ** Command to install dependencies and run executions**
+- npm install    # for installation of dependencies
 
 ## Running Tests
-npx cypress open   # for GUI execution
-npx cypress run    # for headless execution and reporting
+1. **npx cypress open**   # for GUI execution - (it will open modal from where files can be selected for execution)
+2. **npx cypress run**    # for headless execution and reporting (report path will be populated in terminal window)
 
 ## Reports
 Reports are saved in:  
