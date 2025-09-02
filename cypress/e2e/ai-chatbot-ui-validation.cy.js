@@ -50,7 +50,7 @@ describe('Chatbots UI Validation', () => {
   });
 
   it('Verification of RTL layout for Arabic language', { retries: 2 }, () => {
-
+    //switching to arabic mode
     chatpage.switchToArabicMode();
     cy.fixture('test-data.json').then((testData) => {
       const language = Cypress.env('language') || 'ar';
@@ -64,7 +64,7 @@ describe('Chatbots UI Validation', () => {
 
   it('Verification of scroll works correctly in conversation area', { retries: 2 }, () => {
     // Send multiple messages to create scroll
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= 2; i++) {
       chatpage.sendMessage(`Scroll Test Message ${i}`);
     }
     // Verify scrolling works

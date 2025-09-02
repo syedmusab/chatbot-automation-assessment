@@ -1,5 +1,5 @@
 node_modules/
-cypress/reports/
+reports/
 
 # npm logs
 npm-debug.log*

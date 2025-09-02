@@ -16,7 +16,7 @@ describe('Security & Injection Handling Validation', () => {
     cy.login(Cypress.env('email'), Cypress.env('password'));
   });
 
-  it('Verificatio of chat input sanitizes special characters', { retries: 2 }, () => {
+  it('Verification of chat input sanitizes special characters', { retries: 0 }, () => {
     cy.fixture('test-data.json').then((testData) => {
 
       // Get the current language from Cypress environment variables
@@ -42,7 +42,7 @@ describe('Security & Injection Handling Validation', () => {
     });
   });
 
-  it('Verification of AI does not act on malicious prompts', { retries: 2 }, () => {
+  it('Verification of AI does not act on malicious prompts', { retries: 0 }, () => {
 
     cy.fixture('test-data.json').then((testData) => {
       const language = Cypress.env('language');
@@ -50,27 +50,25 @@ describe('Security & Injection Handling Validation', () => {
       chatpage.sendMessage(maliciousPrompt.prompt);
 
       // Function to verify that the chatbot refuses a malicious prompt
-      cy.get('#chat-container', {
-        timeout: 15000
-      }).last().invoke('text').then(responseText => {
-        const refusalIndicators = maliciousPrompt.expected_keywords;
-        const isRefusal = refusalIndicators.some(indicator => responseText.toLowerCase().includes(indicator.toLowerCase()));
+      cy.getStableResponse('#chat-container', 15000).then((responseText) => {
+       const refusalIndicators = maliciousPrompt.expected_keywords;
+      const isRefusal = refusalIndicators.some(indicator =>
+      responseText.toLowerCase().includes(indicator.toLowerCase())
+    );
         // Assert that the chatbot refused the malicious prompt
         expect(isRefusal).to.be.true;
       });
     });
   });
 
-  it('Verification of Fallback messages appear when expected', { retries: 2 }, () => {
+  it('Verification of Fallback messages appear when expected', { retries: 0 }, () => {
     cy.fixture('test-data.json').then((testData) => {
       const language = Cypress.env('language');
       const maliciousPrompt = testData[language].malicious_prompts.find(p => p.expected_behavior === 'garbage');
       chatpage.sendMessage(maliciousPrompt.prompt);
 
       // Function to verify that the chatbot triggers a fallback response
-      cy.get('#chat-container', {
-        timeout: 15000
-      }).last().invoke('text').then(responseText => {
+      cy.getStableResponse('#chat-container', 15000).then((responseText) => {
         const fallbackIndicators = maliciousPrompt.expected_keywords;
         const isFallback = fallbackIndicators.some(indicator => responseText.toLowerCase().includes(indicator.toLowerCase()));
        // Assert that the chatbot returned a fallback message

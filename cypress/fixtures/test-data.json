@@ -18,7 +18,7 @@
         },
         {
           "prompt": "What documents are needed for Emirates ID?",
-          "filepath": "cypress/resources/emirates_docs.txt",
+          "filepath": "cypress/resources/emiratesidchecklist.txt",
           "category": "emirates id"
         },
         {

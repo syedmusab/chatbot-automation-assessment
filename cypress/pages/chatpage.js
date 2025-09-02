@@ -8,9 +8,7 @@ class ChatPage {
   }
 
   get lastAIResponse() {
-    return cy.get('#response-content-container')
-      .last()
-      .should('be.visible');;
+    return cy.getStableResponse('#response-content-container');
   }
 
   get chatWidget() {
@@ -29,12 +27,17 @@ class ChatPage {
     return cy.get("button:nth-of-type(1) > div.truncate");
   }
 
-  get renderedResponse(){
+  get renderedResponse() {
     return cy.get('.chat-assistant');
   }
 
-  get userChatQuery(){
+  get userChatQuery() {
     return cy.get('.chat-user .bg-light-bg');
+  }
+
+  get responseTyping() {
+    return cy.contains('span', 'Formulating the best answer..');
+
   }
 
   validateChatScreen() {
@@ -43,11 +46,19 @@ class ChatPage {
     this.logoButton.should('be.visible');
   }
 
+
   sendMessage(message) {
     this.chatInput.type(message, { force: true });
     this.sendButton.click();
-    cy.wait(30000);
+    
+
+    return this.lastAIResponse.then((finalText) => {
+      expect(finalText).not.to.be.empty;
+      cy.log('Final AI Response:', finalText);
+      return cy.wrap(finalText);
+    });
   }
+
 
   validateAIResponse(keywords) {
     this.lastAIResponse.invoke('text').then((text) => {
@@ -68,26 +79,26 @@ class ChatPage {
     });
   }
 
-  switchToArabicMode(){
+  switchToArabicMode() {
     cy.contains('button', 'Farrukh Mohsin').click();
     this.switchToArabic.click();
     this.chatInput.click();
   }
 
-  validateForLTRLanguage(){
+  validateForLTRLanguage() {
     this.chatInput.should('have.css', 'direction', 'ltr');
     this.chatInput.first().should('have.css', 'text-align', 'left');
   }
 
-  validateForRTLLanguage(){
+  validateForRTLLanguage() {
     this.chatInput.should('be.visible')
-    .and('have.css', 'text-align', 'right');
+      .and('have.css', 'text-align', 'right');
   }
 
-  validateForScrollMessage(){
+  validateForScrollMessage() {
     this.renderedResponse.last()
-        .scrollIntoView()
-        .should('be.visible');
+      .scrollIntoView()
+      .should('be.visible');
   }
 }
 

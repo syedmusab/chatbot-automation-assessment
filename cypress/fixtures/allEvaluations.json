@@ -1,0 +1,13 @@
+[
+  {
+    "query": "What documents are needed for Emirates ID?",
+    "scores": {
+      "lexicalSimilarity": 65.98,
+      "cosineSimilarity": 67.96,
+      "fluencyOur": 25.8,
+      "fluencyExternal": 12.3
+    },
+    "verdict": "Both responses are sufficiently aligned",
+    "externalPlatform": "chatgpt"
+  }
+]

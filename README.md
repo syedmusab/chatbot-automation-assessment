@@ -20,7 +20,7 @@ This framework automates validation of a chatbot's behavior:
 
 - Verifies UI elements (chat widget, input box, scrolling).  
 - Ensures multilingual support (LTR for English, RTL for Arabic).
-- Verifies the responses of Gen AI from different platforms and checks their accuracy.
+- Verifies the responses of chatbots from different platforms and checks their accuracy.
 - Validates chatbot responses to **malicious prompts**:  
   - Sanitization (no `<script>` injection)  
   - Refusal responses  
@@ -54,13 +54,11 @@ This framework automates validation of a chatbot's behavior:
 
 ## Running Tests
 1. **npx cypress open**   # for GUI execution - (it will open modal from where files can be selected for execution)
-2. **npx cypress run**    # for headless execution and reporting (report path will be populated in terminal window)
+2. **npx cypress run --env allure=true**    # for headless execution and reporting (report path will be populated in terminal window)
+3. **npx allure generate reports/allure-results --clean -o reports/allure-report** # To clean the report folder and generate latest results
+4. **npx allure open reports/allure-report** # To Open allure open
 
 ## Reports
 Reports are saved in:  
 `cypress/reports/`
-![Alt text](cypress/screenshots/reports/image.png)<br/>
-
-![Alt text](cypress/screenshots/reports/image-1.png) <br/>
-
-![Alt text](cypress/screenshots/reports/image-2.png) <br/>
+![Alt text](allure-report.png)
