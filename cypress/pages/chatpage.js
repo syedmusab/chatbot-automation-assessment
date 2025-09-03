@@ -40,6 +40,14 @@ class ChatPage {
 
   }
 
+  get hallucinatedOccurance(){
+    return cy.get("#response-content-container");
+}
+
+  validateHallucinatedResponse(){
+    this.hallucinatedOccurance.should('be.visible');
+  }
+
   validateChatScreen() {
     this.chatWidget.should('be.visible');
     this.title.should('be.visible');
@@ -59,21 +67,25 @@ class ChatPage {
     });
   }
 
-
-  validateAIResponse(keywords) {
-    this.lastAIResponse.invoke('text').then((text) => {
-      keywords.forEach(keyword => expect(text.toLowerCase()).to.contain(keyword.toLowerCase()));
+  validateResponseForHallucination(keywords, selector = '#response-content-container') {
+    // Wait until the AI response text stabilizes
+    cy.getStableResponse(selector, 60000).then((finalText) => {
+      const lowerText = finalText.toLowerCase().trim();
+      // Collect any hallucination keywords found in the response
+      const foundKeywords = keywords.filter((keyword) =>
+        lowerText.includes(keyword.toLowerCase())
+      );
+      // Assert that no hallucination keywords are present
+      expect(
+        foundKeywords,
+        `Response contains hallucination keywords: ${foundKeywords.join(', ')}`
+      ).to.be.empty;
     });
   }
-
-  validateResponseForHallucination(keywords) {
-    this.lastAIResponse.invoke('text').then((text) => {
-      keywords.forEach(keyword => expect(text.toLowerCase()).to.not.include(keyword.toLowerCase()));
-    });
-  }
+  
 
   validateResponseForBrokenHtml() {
-    this.lastAIResponse.invoke('html').then((html) => {
+    this.lastAIResponse.should('exist').invoke('html').then((html) => {
       // Check that there are no unclosed HTML tags at the end
       expect(html).not.to.match(/<[^>]*$/);
     });

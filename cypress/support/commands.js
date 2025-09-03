@@ -8,52 +8,52 @@ Cypress.Commands.add('login', () => {
     .and('be.visible')
 });
 
-Cypress.Commands.add('getStableResponse',( selector = '#response-content-container', timeout = 60000, interval = 3000, stableThreshold = 2) => {
-    const placeholderTexts = [
-      '⏳ Just a sec...',
-      '💡 Thinking through your question...',
-      '📝 Formulating the best answer...'
-    ];
+Cypress.Commands.add('getStableResponse', (selector, timeout = 60000, interval = 3000, stableThreshold = 2) => {
+  const placeholderTexts = [
+    '⏳ Just a sec...',
+    '💡 Thinking through your question...',
+    '📝 Formulating the best answer...'
+  ];
 
-    let lastText = '';
-    let stableCount = 0;
-    const start = Date.now();
+  let lastText = '';
+  let stableCount = 0;
+  const start = Date.now();
 
-    function check() {
-      return cy.get(selector)
-        .last()
-        .invoke('text')
-        .then((text) => {
-          const trimmed = text.trim();
+  function check() {
+    return cy.get(selector)
+      .last()
+      .invoke('text')
+      .then((text) => {
+        const trimmed = text.trim();
 
-          // Ignore placeholder messages
-          if (placeholderTexts.includes(trimmed)) {
-            return cy.wait(interval).then(check);
-          }
-
-          // Check if text is stable
-          if (trimmed && trimmed === lastText) {
-            stableCount++;
-            if (stableCount >= stableThreshold) {
-              // Wrap the final stable text for Cypress chaining
-              return cy.wrap(trimmed);
-            }
-          } else {
-            lastText = trimmed;
-            stableCount = 0;
-          }
-
-          // Timeout exception
-          if (Date.now() - start > timeout) {
-            throw new Error(
-              `AI response did not stabilize in time. Last text: "${lastText}"`
-            );
-          }
+        // Ignore placeholder messages
+        if (placeholderTexts.includes(trimmed)) {
           return cy.wait(interval).then(check);
-        });
-    }
-    return check();
+        }
+
+        // Check if text is stable
+        if (trimmed && trimmed === lastText) {
+          stableCount++;
+          if (stableCount >= stableThreshold) {
+            // Wrap the final stable text for Cypress chaining
+            return cy.wrap(trimmed);
+          }
+        } else {
+          lastText = trimmed;
+          stableCount = 0;
+        }
+
+        // Timeout exception
+        if (Date.now() - start > timeout) {
+          throw new Error(
+            `AI response did not stabilize in time. Last text: "${lastText}"`
+          );
+        }
+        return cy.wait(interval).then(check);
+      });
   }
+  return check();
+}
 );
 
 
@@ -87,6 +87,15 @@ Cypress.Commands.add('waitForFinalAIResponse', (chatId, timeout = 10000, interva
   return check();
 });
 
+Cypress.Commands.add('validateResponseForBrokenHtml', (selector = '#response-content-container') => {
+  cy.get(selector)
+    .last()
+    .should('exist')
+    .invoke('html')
+    .then((html) => {
+      expect(html, 'Response ends with incomplete HTML tag').not.to.match(/<[^>]*$/);
+    });
+});
 
 Cypress.Commands.add('setLanguage', (language) => {
   cy.get('[data-testid="language-switcher"]').click();
@@ -160,5 +169,4 @@ Cypress.Commands.add('validateResponse', (expectedKeywords, timeout = 60000) => 
         expect(isFallback).to.be.true;
       });
   });
-
 });

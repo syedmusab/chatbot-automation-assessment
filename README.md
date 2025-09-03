@@ -61,4 +61,5 @@ This framework automates validation of a chatbot's behavior:
 ## Reports
 Reports are saved in:  
 `reports/`
+
 ![Alt text](allure-report.png)
