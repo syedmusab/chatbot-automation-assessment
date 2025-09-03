@@ -60,5 +60,5 @@ This framework automates validation of a chatbot's behavior:
 
 ## Reports
 Reports are saved in:  
-`cypress/reports/`
+`reports/`
 ![Alt text](allure-report.png)
