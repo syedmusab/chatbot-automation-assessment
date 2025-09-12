@@ -1,4 +1,7 @@
 Cypress.Commands.add('login', () => {
+  // Intercept the login API call
+  cy.intercept('POST', '/api/v1/auths/signin').as('loginRequest');
+
   cy.contains("button", "Login using Credentials").click();
   cy.get('#email').type(Cypress.env('email'));
   cy.get('#password').type(Cypress.env('password'), { log: false });
@@ -6,6 +9,18 @@ Cypress.Commands.add('login', () => {
   cy.get('.suggestion-inputbox.w-full')
     .should('exist')
     .and('be.visible')
+
+  // Wait for the login request to complete
+  return cy.wait('@loginRequest').then(({ response }) => {
+    expect(response.statusCode).to.eq(200);
+
+    // Extract token from response headers
+    const token = response.body['token'] || response.body['token'];
+    expect(token, 'Login token should exist in header').to.not.be.undefined;
+
+    // Remove 'Bearer '
+    return token.replace(/^Bearer\s+/i, '');
+  });
 });
 
 Cypress.Commands.add('getStableResponse', (selector, timeout = 60000, interval = 3000, stableThreshold = 2) => {
@@ -56,15 +71,14 @@ Cypress.Commands.add('getStableResponse', (selector, timeout = 60000, interval =
 }
 );
 
-
-Cypress.Commands.add('waitForFinalAIResponse', (chatId, timeout = 10000, interval = 2000) => {
+Cypress.Commands.add('waitForFinalAIResponse', (token, chatId, timeout = 10000, interval = 2000) => {
   const start = Date.now();
   function check(lastText = '', stableCount = 0) {
     return cy.request({
       method: 'GET',
       url: `/api/v1/chats/${chatId}`,
       headers: {
-        'Authorization': `Bearer ${Cypress.env('authToken')}`,
+        'Authorization': `Bearer ${token}`,
         'Accept': Cypress.env('ContentType')
       }
     }).then((res) => {
