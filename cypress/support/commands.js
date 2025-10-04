@@ -86,10 +86,15 @@ Cypress.Commands.add('waitForFinalAIResponse', (token, chatId, timeout = 10000, 
       const messages = res.body.chat.messages;
       const lastMessage = messages[messages.length - 1];
       const aiText = lastMessage?.content?.trim() || '';
+
+       // if the latest message text has not changed since last check
       if (aiText && aiText === lastText) {
         if (stableCount >= 1) {
+
+          // Considered stable and return 
           return cy.wrap(aiText);
         }
+        // Wait once more to confirm stability
         return cy.wait(interval).then(() => check(aiText, stableCount + 1));
       }
       if (Date.now() - start > timeout) {

@@ -38,7 +38,7 @@ describe('Security & Injection Handling Validation', () => {
           expect(html).not.to.include('<script>');
         });
       };
-      verifySanitization('.chat-user .bg-light-bg');
+      verifySanitization('#response-content-container');
     });
   });
 
