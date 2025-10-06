@@ -49,7 +49,7 @@ describe('Gov-GPT AI Response Validation with external AI platforms', () => {
         expect(getResponse.status).to.eq(200);
         const chats = getResponse.body;
         const chat = chats.find(c =>
-          c.title.toLowerCase().includes('emirates id document checklist'.toLowerCase())
+          c.title.toLowerCase().includes('Emirates ID Required Documents'.toLowerCase())
         );
         // retrieve chat id
         const chatId = chat.id;
@@ -97,7 +97,7 @@ describe('Gov-GPT AI Response Validation with external AI platforms', () => {
         expect(getResponse.status).to.eq(200);
         const chats = getResponse.body;
         const chat = chats.find(c =>
-          c.title.toLowerCase().includes('emirates id document checklist'.toLowerCase())
+          c.title.toLowerCase().includes('Emirates ID Required Documents'.toLowerCase())
         );
 
         // retrieve chat id

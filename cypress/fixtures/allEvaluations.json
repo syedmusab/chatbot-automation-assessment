@@ -2,9 +2,9 @@
   {
     "query": "What documents are needed for Emirates ID?",
     "scores": {
-      "lexicalSimilarity": 64.83,
-      "cosineSimilarity": 70.9,
-      "fluencyOur": 36.3,
+      "lexicalSimilarity": 70.08,
+      "cosineSimilarity": 69.75,
+      "fluencyOur": 6.5,
       "fluencyExternal": 12.3
     },
     "verdict": "Both responses are sufficiently aligned",
